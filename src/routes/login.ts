@@ -9,7 +9,7 @@ const app = express();
 
 export default app;
 
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
 app.engine("handlebars", engine({

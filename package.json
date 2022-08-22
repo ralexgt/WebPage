@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon src/server.ts",
-    "mongodb": "nodemon mongodbconnect/index.ts"
+    "start": "nodemon src/index.ts"
   },
   "keywords": [],
   "author": "",
