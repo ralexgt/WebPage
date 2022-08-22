@@ -83,7 +83,6 @@ function main(){
     res.cookie("loggedIn", `${connectAccount.username}`, {
       maxAge: 600000
     })
-    await db.collection("accounts").findOneAndReplace({username: connectAccount.username}, {username: connectAccount.username, password: connectAccount.password, logged_in: true});
     res.redirect(`./homePage`);
     console.log(`${connectAccount.username} logged in`);
   });
