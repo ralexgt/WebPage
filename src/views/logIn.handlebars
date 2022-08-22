@@ -1,9 +1,11 @@
+{{problem}}
+
 <form action="/logIn" method="post">
   	Username:<br>
-  	<input type="text" name="username" placeholder="Username"><br><br>
+  	<input type="text" name="username" placeholder="Username" required><br><br>
   	Password:<br>
-  	<input type="password" name="password" placeholder="Password"><br><br>
-  	<input type="submit" onclick="location.href='http://localhost:5000/userPanel';" value="log in">
+  	<input type="password" name="password" placeholder="Password" required><br><br>
+  	<input type="submit"  value="log in">
 	</form>
 
 <p>If you do not have an account, you can create one here: <input type="button" onclick="location.href='http://localhost:5000/register';" value="register" /></p>
