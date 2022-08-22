@@ -3,12 +3,14 @@ import { engine } from "express-handlebars";
 import Accounts from "../account";
 import bodyParser from "body-parser";
 import { MongoClient } from "mongodb";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
 export default app;
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded());
+app.use(cookieParser());
 
 app.engine("handlebars", engine({
   defaultLayout: "index",
@@ -29,47 +31,44 @@ function main(){
     console.log(`MongoDB Connected: ${dbUrl}`);
 
 
-  let currentAccount = new Accounts;
   app.get("/homePage", async (req, res) => {
-    if(!currentAccount.logged_in)
-      res.render("loggedOut");
-      else res.redirect(`./userPanel/${currentAccount.username}`);
+      if(!req.cookies.loggedIn)
+        res.render("loggedOut");
+        else res.render("loggedIn");
   });
 
-
   app.get("/register", async (req, res) => {
-    if(!currentAccount.logged_in) 
+    if(!req.cookies.loggedIn) 
       res.render("register");
-      else res.redirect(`./userPanel/${currentAccount.username}`)
+      else res.redirect("./homePage");
+
 
   });
   app.post("/register", async (req, res) => {
-        const account = new Accounts({
-          username: req.body.username,
-          password: req.body.password,
-          logged_in: 0
-        });
-
-        if(await db.collection("accounts").findOne({username: account.username}))
-          {res.render("userExists");
-          console.log("tried to register an existing user");
-          return;
-        }
-        db.collection("accounts").insertOne(account);
-        res.redirect("./logIn");
-        console.log("new account added to db");
+      const account = new Accounts({
+        username: req.body.username,
+        password: req.body.password,
+      });
+      if(await db.collection("accounts").findOne({username: account.username}))
+        {res.render("userExists");
+        console.log("tried to register an existing user");
+        return;
+      }
+      db.collection("accounts").insertOne(account);
+      res.redirect("./logIn");
+      console.log("new account added to db");
   });
 
 
   app.get("/logIn", async (req, res) => {
-    if(!currentAccount.logged_in) 
+    if(!req.cookies.loggedIn) 
       res.render("logIn");
-      else res.redirect(`./userPanel/${currentAccount.username}`)
+      else res.redirect(`./homePage`)
 
   });
   app.post("/logIn", async (req, res) => {
     const  connectAccount = new Accounts ({username: req.body.username,
-           password: req.body.password, logged_in: true
+           password: req.body.password
           })
     if(!(await db.collection("accounts").findOne({username: connectAccount.username}))){
       res.render("wrongUsername");
@@ -81,27 +80,18 @@ function main(){
       console.log("wrong password");
       return;
     }
+    res.cookie("loggedIn", `${connectAccount.username}`, {
+      maxAge: 600000
+    })
     await db.collection("accounts").findOneAndReplace({username: connectAccount.username}, {username: connectAccount.username, password: connectAccount.password, logged_in: true});
-    currentAccount = connectAccount;
-    res.redirect(`./userPanel/${connectAccount.username}`);
+    res.redirect(`./homePage`);
     console.log(`${connectAccount.username} logged in`);
   });
 
   
-  app.get("/userPanel/:user", async (req, res) => {
-    const account = await db.collection("accounts").findOne({username: req.params.user});
-    if(!account) return;
-    if(account.logged_in) {
-      res.render("userPanelLoggedIn");
-    }
-      else {
-        res.status(400); 
-        res.render("forcedUserPanel");
-      }
-  });
   app.post("/logOut", async (req, res) => {
-    db.collection("accounts").findOneAndReplace({username: currentAccount.username}, {username: currentAccount.username, password: currentAccount.password, usernamelogged_in: false});
-    currentAccount = new Accounts;
+    console.log(`${req.cookies.loggedIn} logged out`);
+    res.clearCookie("loggedIn");
     res.redirect("./homePage");
   });
   });

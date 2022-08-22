@@ -1,10 +1,10 @@
 import express from "express";
-import routes from "./routes/routes";
+import login from "./routes/login";
 
 
 const PORT = 5000;
 const app = express();
-app.use(routes);
+app.use(login);
 
 
 function main (){
@@ -15,5 +15,3 @@ function main (){
 }
 
 main();
-
-//homePage register logIn  userPanel

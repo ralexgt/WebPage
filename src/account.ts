@@ -8,10 +8,6 @@ const AccountSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-  },
-  logged_in:{
-    type: Boolean,
-    required: false,
   }
 });
 
