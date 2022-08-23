@@ -16,6 +16,9 @@ function main() {
     const db = client.db("webpage");
     console.log(`MongoDB Connected: ${dbUrl}`);
 
+    app.get("/", (req, res) => {
+      res.redirect("/homePage");
+    })
     app.get("/homePage", (req, res) => {
       if (!req.cookies.loggedIn) res.render("loggedOut");
       else res.render("loggedIn", { user: `${req.cookies.loggedIn}` });
