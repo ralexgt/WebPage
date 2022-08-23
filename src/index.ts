@@ -21,6 +21,10 @@ app.set("view engine", "handlebars");
 app.set("views", "./src/views");
 
 function main() {
+  app.get("/", (req, res) => {
+    res.redirect("/homePage");
+  });
+
   app.listen(PORT, () =>
     console.log(`Server running on port http://localhost:${PORT}`)
   );
