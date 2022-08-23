@@ -22,7 +22,7 @@ app.set("views", "./src/views");
 
 function main() {
   app.get("/", (req, res) => {
-    res.redirect("/homePage");
+    res.redirect("homePage");
   });
 
   app.listen(PORT, () =>

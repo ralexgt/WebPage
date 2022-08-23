@@ -23,7 +23,7 @@ function main() {
 
     app.get("/register", (req, res) => {
       if (!req.cookies.loggedIn) res.render("register");
-      else res.redirect("/homePage");
+      else res.redirect("homePage");
     });
     app.post("/register", async (req, res) => {
       const account = new Accounts({
@@ -37,12 +37,12 @@ function main() {
         return;
       }
       db.collection("accounts").insertOne(account);
-      res.redirect("/logIn");
+      res.redirect("logIn");
     });
 
     app.get("/logIn", (req, res) => {
       if (!req.cookies.loggedIn) res.render("logIn");
-      else res.redirect("/homePage");
+      else res.redirect("homePage");
     });
     app.post("/logIn", async (req, res) => {
       const connectAccount = new Accounts({
@@ -68,12 +68,12 @@ function main() {
       res.cookie("loggedIn", `${connectAccount.username}`, {
         maxAge: 600000,
       });
-      res.redirect("/homePage");
+      res.redirect("homePage");
     });
 
     app.get("/logOut", (req, res) => {
       res.clearCookie("loggedIn");
-      res.redirect("/homePage");
+      res.redirect("homePage");
     });
   });
 }
