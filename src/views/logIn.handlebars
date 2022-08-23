@@ -1,11 +1,22 @@
-{{problem}}
+<p> {{problem}} </p>
 
-<form action="/logIn" method="post">
-  	Username:<br>
-  	<input type="text" name="username" placeholder="Username" required><br><br>
-  	Password:<br>
-  	<input type="password" name="password" placeholder="Password" required><br><br>
-  	<input type="submit"  value="log in">
-	</form>
+<div>
+  <form action="/logIn" method="post">
+    Username:<br />
+    <input type="text" name="username" placeholder="Username" required />
+    <br />
+    <br />
+    Password:<br />
+    <input type="password" name="password" placeholder="Password" required />
+    <br />
+    <br />
+    <input type="submit" value="log in" />
+  </form>
+</div>
 
-<p>If you do not have an account, you can create one here: <input type="button" onclick="location.href='http://localhost:5000/register';" value="register" /></p>
+<div>
+  <p>
+    If you do not have an account &nbsp;
+    <a href="http://localhost:5000/register">Register </a>
+  </p>
+</div>
