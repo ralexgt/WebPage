@@ -1,0 +1,21 @@
+<div>
+  {{#each currentUrls}}
+    <p> {{this}} </p>
+  {{/each}}
+</div>
+<p>
+  {{problem}}
+</p>
+
+<p>
+  <form action="/shortUrls" method="post">
+    <label for="newUrl">New Url </label>
+    <input
+      type="text"
+      id="newUrl"
+      name="newUrl"
+      placeholder="localhost:5000/..."
+    />
+    <input type="submit" value="short url" />
+  </form>
+</p>
