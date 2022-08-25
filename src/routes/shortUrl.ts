@@ -49,7 +49,9 @@ function main() {
         return;
       }
       let redirectUrl = await db.collection("urls").findOne({ shortUrl: url });
-      res.redirect(`${redirectUrl!.longUrl.slice(15)}`);
+      if (redirectUrl!.longUrl.slice(0, 15) != "localhost:5000/") {
+        res.redirect(`https://${redirectUrl!.longUrl}`);
+      } else res.redirect(`${redirectUrl!.longUrl.slice(15)}`);
     });
   });
 }
