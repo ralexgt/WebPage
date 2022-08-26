@@ -59,7 +59,7 @@ function main() {
 function randomUrl(length: number) {
   let randomUrl = "";
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  for (var i = 0; i < length; i++) {
+  for (let i = 0; i < length; i++) {
     randomUrl += characters.charAt(
       Math.floor(Math.random() * characters.length)
     );
