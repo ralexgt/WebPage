@@ -48,7 +48,9 @@ function main() {
         res.status(404).send("Wrong URL");
         return;
       }
-      let redirectUrl = await db.collection("urls").findOne({ shortUrl: url });
+      const redirectUrl = await db
+        .collection("urls")
+        .findOne({ shortUrl: url });
       res.redirect(`http://${redirectUrl!.longUrl}`);
     });
   });
