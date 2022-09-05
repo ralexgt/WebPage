@@ -1,3 +1,5 @@
+<a href="http://localhost/homePage"> Home page </a>
+
 <div>
   {{#each currentUrls}}
     <p> {{this}} </p>
@@ -10,12 +12,7 @@
 <p>
   <form action="/shortUrls" method="post">
     <label for="newUrl">New Url </label>
-    <input
-      type="text"
-      id="newUrl"
-      name="newUrl"
-      placeholder="localhost:5000/..."
-    />
+    <input type="text" id="newUrl" name="newUrl" placeholder="localhost/..." />
     <input type="submit" value="short url" />
   </form>
 </p>

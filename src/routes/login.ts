@@ -6,8 +6,7 @@ const app = express.Router();
 export default app;
 
 function main() {
-  const dbUrl = "mongodb://127.0.0.1:27017";
-
+  const dbUrl = "mongodb://mongo:27017/page";
   MongoClient.connect(dbUrl, {}, (err, client) => {
     if (err) {
       return console.log(err);

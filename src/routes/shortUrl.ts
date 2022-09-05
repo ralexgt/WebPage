@@ -5,7 +5,7 @@ const app = express.Router();
 export default app;
 
 function main() {
-  const dbUrl = "mongodb://127.0.0.1:27017";
+  const dbUrl = "mongodb://mongo:27017/page";
   MongoClient.connect(dbUrl, {}, async (err, client) => {
     if (err) {
       return console.log(err);
@@ -27,7 +27,7 @@ function main() {
     });
     app.post("/shortUrls", async (req, res) => {
       const newUrl: string = req.body.newUrl;
-      let shortenedUrl = `localhost:5000/${randomUrl(4)}`;
+      let shortenedUrl = `localhost/${randomUrl(4)}`;
       if (await db.collection("urls").findOne({ longUrl: newUrl })) {
         res.render("urlshortener", { problem: "Url is already on the list" });
         return;
@@ -43,7 +43,7 @@ function main() {
     });
 
     app.get("/:url", async (req, res) => {
-      const url = `localhost:5000/${req.params.url}`;
+      const url = `localhost/${req.params.url}`;
       if (!(await db.collection("urls").findOne({ shortUrl: url }))) {
         res.status(404).send("Wrong URL");
         return;
