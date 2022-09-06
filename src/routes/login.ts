@@ -20,7 +20,7 @@ function main() {
       res.redirect("homePage");
     });
     app.get("/homePage", (req, res) => {
-      if (!req.cookies.loggedIn) res.render("loggedOut", { port: `${PORT}` });
+      if (!req.cookies.loggedIn) res.render("loggedOut", { port: PORT });
       else
         res.render("loggedIn", {
           user: `${req.cookies.loggedIn}`,
@@ -29,7 +29,7 @@ function main() {
     });
 
     app.get("/register", (req, res) => {
-      if (!req.cookies.loggedIn) res.render("register", { port: `${PORT}` });
+      if (!req.cookies.loggedIn) res.render("register", { port: PORT });
       else res.redirect("homePage");
     });
     app.post("/register", async (req, res) => {
@@ -42,7 +42,7 @@ function main() {
       ) {
         res.render("register", {
           problem: "User already exists!",
-          port: `${PORT}`,
+          port: PORT,
         });
         return;
       }
@@ -51,7 +51,7 @@ function main() {
     });
 
     app.get("/logIn", (req, res) => {
-      if (!req.cookies.loggedIn) res.render("logIn", { port: `${PORT}` });
+      if (!req.cookies.loggedIn) res.render("logIn", { port: PORT });
       else res.redirect("homePage");
     });
     app.post("/logIn", async (req, res) => {
@@ -66,7 +66,7 @@ function main() {
       ) {
         res.render("logIn", {
           problem: "This user does not exist",
-          port: `${PORT}`,
+          port: PORT,
         });
         return;
       }
@@ -75,7 +75,7 @@ function main() {
           .collection("accounts")
           .findOne({ password: connectAccount.password }))
       ) {
-        res.render("logIn", { problem: "Wrong password", port: `${PORT}` });
+        res.render("logIn", { problem: "Wrong password", port: PORT });
         return;
       }
       res.cookie("loggedIn", `${connectAccount.username}`, {

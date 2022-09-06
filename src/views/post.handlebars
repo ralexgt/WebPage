@@ -1,0 +1,21 @@
+<p> {{title}}</p>
+<p> Created by: {{author}} </p>
+<hr />
+<p> {{content}} </p>
+<hr />
+<div>
+  {{#if isAuthor}}
+    <form action="/blogs/{{blogUrl}}" method="post">
+      <input type="submit" value="Delete" />
+    </form>
+  {{/if}}
+</div>
+<p>
+  <a href="http://localhost:{{port}}/homePage"> home page </a>
+</p>
+<p>
+  <a href="http://localhost:{{port}}/posts"> posts </a>
+</p>
+<p>
+  <a href="http://localhost:{{port}}/newPost"> new post </a>
+</p>

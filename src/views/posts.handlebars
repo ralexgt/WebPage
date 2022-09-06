@@ -1,0 +1,14 @@
+<p>
+  <a href="http://localhost:{{port}}/homePage"> home page </a>
+</p>
+<p>
+  <a href="http://localhost:{{port}}/newPost"> new post </a>
+</p>
+
+<div>
+  {{#each posts}}
+    <p>
+      <a href="http://{{this}}"> {{this}} </a>
+    </p>
+  {{/each}}
+</div>

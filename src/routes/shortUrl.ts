@@ -24,7 +24,7 @@ function main() {
         });
       res.render("urlshortener", {
         currentUrls: urls,
-        port: `${PORT}`,
+        port: PORT,
       });
     });
     app.post("/shortUrls", async (req, res) => {
@@ -33,7 +33,7 @@ function main() {
       if (await db.collection("urls").findOne({ longUrl: newUrl })) {
         res.render("urlshortener", {
           problem: "Url is already on the list",
-          port: `${PORT}`,
+          port: PORT,
         });
         return;
       }
@@ -61,7 +61,7 @@ function main() {
   });
 }
 
-function randomUrl(length: number) {
+export function randomUrl(length: number) {
   let randomUrl = "";
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   for (let i = 0; i < length; i++) {
