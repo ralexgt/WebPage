@@ -1,6 +1,7 @@
 import express from "express";
 import { MongoClient } from "mongodb";
 import Accounts from "../account";
+import { PORT } from "../index";
 
 const app = express.Router();
 export default app;
@@ -19,12 +20,16 @@ function main() {
       res.redirect("homePage");
     });
     app.get("/homePage", (req, res) => {
-      if (!req.cookies.loggedIn) res.render("loggedOut");
-      else res.render("loggedIn", { user: `${req.cookies.loggedIn}` });
+      if (!req.cookies.loggedIn) res.render("loggedOut", { port: `${PORT}` });
+      else
+        res.render("loggedIn", {
+          user: `${req.cookies.loggedIn}`,
+          port: `${PORT}`,
+        });
     });
 
     app.get("/register", (req, res) => {
-      if (!req.cookies.loggedIn) res.render("register");
+      if (!req.cookies.loggedIn) res.render("register", { port: `${PORT}` });
       else res.redirect("homePage");
     });
     app.post("/register", async (req, res) => {
@@ -35,7 +40,10 @@ function main() {
       if (
         await db.collection("accounts").findOne({ username: account.username })
       ) {
-        res.render("register", { problem: "User already exists!" });
+        res.render("register", {
+          problem: "User already exists!",
+          port: `${PORT}`,
+        });
         return;
       }
       db.collection("accounts").insertOne(account);
@@ -43,7 +51,7 @@ function main() {
     });
 
     app.get("/logIn", (req, res) => {
-      if (!req.cookies.loggedIn) res.render("logIn");
+      if (!req.cookies.loggedIn) res.render("logIn", { port: `${PORT}` });
       else res.redirect("homePage");
     });
     app.post("/logIn", async (req, res) => {
@@ -56,7 +64,10 @@ function main() {
           .collection("accounts")
           .findOne({ username: connectAccount.username }))
       ) {
-        res.render("logIn", { problem: "This user does not exist" });
+        res.render("logIn", {
+          problem: "This user does not exist",
+          port: `${PORT}`,
+        });
         return;
       }
       if (
@@ -64,7 +75,7 @@ function main() {
           .collection("accounts")
           .findOne({ password: connectAccount.password }))
       ) {
-        res.render("logIn", { problem: "Wrong password" });
+        res.render("logIn", { problem: "Wrong password", port: `${PORT}` });
         return;
       }
       res.cookie("loggedIn", `${connectAccount.username}`, {

@@ -1,4 +1,4 @@
-<a href="http://localhost/homePage"> Home page </a>
+<a href="http://localhost:{{port}}/homePage"> Home page </a>
 
 <div>
   {{#each currentUrls}}
@@ -12,7 +12,12 @@
 <p>
   <form action="/shortUrls" method="post">
     <label for="newUrl">New Url </label>
-    <input type="text" id="newUrl" name="newUrl" placeholder="localhost/..." />
+    <input
+      type="text"
+      id="newUrl"
+      name="newUrl"
+      placeholder="localhost{{porst}}/..."
+    />
     <input type="submit" value="short url" />
   </form>
 </p>

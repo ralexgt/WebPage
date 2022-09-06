@@ -5,6 +5,8 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import { engine } from "express-handlebars";
 
+export { PORT };
+
 const PORT = 5000;
 const app = express();
 
@@ -23,7 +25,9 @@ app.set("view engine", "handlebars");
 app.set("views", "./src/views");
 
 function main() {
-  app.listen(PORT, () => console.log(`Server running on http://localhost`));
+  app.listen(PORT, () =>
+    console.log(`Server running on http://localhost:5000`)
+  );
 }
 
 main();

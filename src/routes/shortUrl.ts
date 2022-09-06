@@ -1,5 +1,6 @@
 import express from "express";
 import { MongoClient } from "mongodb";
+import { PORT } from "../index";
 
 const app = express.Router();
 export default app;
@@ -23,13 +24,17 @@ function main() {
         });
       res.render("urlshortener", {
         currentUrls: urls,
+        port: `${PORT}`,
       });
     });
     app.post("/shortUrls", async (req, res) => {
       const newUrl: string = req.body.newUrl;
-      let shortenedUrl = `localhost/${randomUrl(4)}`;
+      let shortenedUrl = `localhost:${PORT}/${randomUrl(4)}`;
       if (await db.collection("urls").findOne({ longUrl: newUrl })) {
-        res.render("urlshortener", { problem: "Url is already on the list" });
+        res.render("urlshortener", {
+          problem: "Url is already on the list",
+          port: `${PORT}`,
+        });
         return;
       }
       while (await db.collection("urls").findOne({ shortUrl: shortenedUrl })) {
@@ -43,7 +48,7 @@ function main() {
     });
 
     app.get("/:url", async (req, res) => {
-      const url = `localhost/${req.params.url}`;
+      const url = `localhost:${PORT}/${req.params.url}`;
       if (!(await db.collection("urls").findOne({ shortUrl: url }))) {
         res.status(404).send("Wrong URL");
         return;
