@@ -1,4 +1,4 @@
-<p> Author: {{author}} </p>
+<p> Author: <span class="author"> {{author}} </span> </p>
 
 <form action="newPost" method="POST">
   <p>
@@ -11,7 +11,21 @@
     />
   </p>
   <p>
-    <input type="text" name="content" placeholder="blog content" />
+    <textarea
+      class="content"
+      name="content"
+      placeholder="blog content"
+      cols="30"
+      rows="10"
+    ></textarea>
   </p>
   <input type="submit" value="Publish" />
 </form>
+<div class="redirectLinks">
+  <p>
+    <a href="http://localhost:{{port}}/homePage"> home page </a>
+  </p>
+  <p>
+    <a href="http://localhost:{{port}}/posts"> posts </a>
+  </p>
+</div>

@@ -20,7 +20,7 @@ function main() {
         .collection("posts")
         .find()
         .forEach((item) => {
-          urls.push(`${item.url}`);
+          urls.unshift(`${item.url}`);
         });
       res.render("posts", {
         posts: urls,
@@ -31,24 +31,24 @@ function main() {
       if (!req.cookies.loggedIn) {
         res.redirect("homePage");
       } else {
-        res.render("newPost", { author: req.cookies.loggedIn });
+        res.render("newPost", { author: req.cookies.loggedIn, port: PORT });
       }
     });
     app.post("/newPost", async (req, res) => {
       const title: String = req.body.title;
-      const link = title.split(" ").join("-");
+      const link = title.split(" ").join("_");
       db.collection("posts").insertOne({
         author: req.cookies.loggedIn,
         title: title,
         content: req.body.content,
-        url: `localhost:${PORT}/blogs/${link}`,
+        url: `${link}`,
       });
       res.redirect("posts");
     });
     app.get("/blogs/:url", async (req, res) => {
       const blog = await db
         .collection("posts")
-        .findOne({ url: `localhost:${PORT}/blogs/${req.params.url}` });
+        .findOne({ url: `${req.params.url}` });
       if (!blog) {
         res.status(404).send("Blog not found!");
         return;
@@ -72,7 +72,6 @@ function main() {
       });
       res.redirect("/posts");
     });
-    app.get("teste", (req, res) => {});
   });
 }
 

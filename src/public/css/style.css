@@ -1,0 +1,43 @@
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0px;
+  margin-left: 10px;
+}
+.redirectLinks {
+  padding-top: 5px;
+  color: black;
+}
+.rightSidebar {
+  height: 100%;
+  width: 23%;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  padding-top: 10px;
+  background-color: gray;
+}
+.recentPosts {
+  padding-left: 10px;
+  display: block;
+}
+.rightSidebar p {
+  color: black;
+  padding-left: 25px;
+  font-weight: bold;
+  display: block;
+}
+.author {
+  color: black;
+  font-weight: bold;
+}
+.titles {
+  color: red;
+  font-weight: bold;
+  font-style: italic;
+}
+.content {
+  resize: none;
+}

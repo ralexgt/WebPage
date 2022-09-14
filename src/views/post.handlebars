@@ -1,5 +1,5 @@
-<p> {{title}}</p>
-<p> Created by: {{author}} </p>
+<p> Article: <span class="titles"> {{title}} </span></p>
+<p> Created by: <span class="author"> {{author}} </span> </p>
 <hr />
 <p> {{content}} </p>
 <hr />
@@ -10,12 +10,14 @@
     </form>
   {{/if}}
 </div>
-<p>
-  <a href="http://localhost:{{port}}/homePage"> home page </a>
-</p>
-<p>
-  <a href="http://localhost:{{port}}/posts"> posts </a>
-</p>
-<p>
-  <a href="http://localhost:{{port}}/newPost"> new post </a>
-</p>
+<div class="redirectLinks">
+  <p>
+    <a href="http://localhost:{{port}}/homePage"> home page </a>
+  </p>
+  <p>
+    <a href="http://localhost:{{port}}/posts"> posts </a>
+  </p>
+  <p>
+    <a href="http://localhost:{{port}}/newPost"> new post </a>
+  </p>
+</div>

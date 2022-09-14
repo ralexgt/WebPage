@@ -1,14 +1,16 @@
-<p>
-  <a href="http://localhost:{{port}}/homePage"> home page </a>
-</p>
-<p>
-  <a href="http://localhost:{{port}}/newPost"> new post </a>
-</p>
-
-<div>
+<div class="redirectLinks">
+  <p>
+    <a href="http://localhost:{{port}}/homePage"> home page </a>
+  </p>
+  <p>
+    <a href="http://localhost:{{port}}/newPost"> new post </a>
+  </p>
+</div>
+<div class="rightSidebar">
+  <p> Recent posts: </p>
   {{#each posts}}
-    <p>
-      <a href="http://{{this}}"> {{this}} </a>
-    </p>
+    <div class="recentPosts">
+      <a href="http://localhost:5000/blogs/{{this}}"> {{this}} </a>
+    </div>
   {{/each}}
 </div>

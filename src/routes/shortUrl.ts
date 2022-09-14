@@ -61,7 +61,7 @@ function main() {
   });
 }
 
-export function randomUrl(length: number) {
+function randomUrl(length: number) {
   let randomUrl = "";
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   for (let i = 0; i < length; i++) {
